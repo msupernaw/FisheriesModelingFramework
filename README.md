@@ -34,8 +34,8 @@ selectivity, etc. This design provides flexibility to accommodate many types of 
 For example:
 
 
-
-  <code>//create a population data module
+<pre><code>
+  //create a population data module
     noaa::nmfs::AgeBasedPopulation<double> population;
 
     //create a functor list
@@ -57,7 +57,7 @@ For example:
     for (int i = 0; i < functors.size(); i++) {
         ret += functors[i]->Evaluate(&population);
     }
-</code>
+</code></pre>
 
 To-do:
 
