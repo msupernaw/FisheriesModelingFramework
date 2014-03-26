@@ -13,24 +13,23 @@
 #include <pair.h>
 
 template<class T, class EVAL_TYPE = T>
-class Configuration{
+class Configuration {
     std::vector<std::pair<EVAL_TYPE*, uint32_t> > registered_estimable_types;
 
-    
-   
-    public:
-        
-    
-        void RegisterEstimable( EVAL_TYPE& estimable, uint32_t phase =0){
-            this->registered_estimable_types.push_back(std::pair<EVAL_TYPE*,uint32_t>(&estimable,phase));
-        }
-        
+
+
+public:
+
+    void RegisterEstimable(EVAL_TYPE& estimable, uint32_t phase = 0) {
+        this->registered_estimable_types.push_back(std::pair<EVAL_TYPE*, uint32_t > (&estimable, phase));
+    }
+
     std::vector<std::pair<EVAL_TYPE*, uint32_t> > GetRegisteredEstimableTypes() const {
         return registered_estimable_types;
     }
 
-       
-    
+
+
 };
 
 
