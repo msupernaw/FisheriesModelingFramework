@@ -60,7 +60,7 @@ For example:
     double ret = 0;
 
     //all functors provide the routine
-    // const EVAL_TPYE Evaluate(noaa::nmfs::Population&lt;BASE_TYPE,EVAL_TYPE&gt;* population) 
+    // const EVAL_TPYE Evaluate(noaa::nmfs::PopulationDM&lt;BASE_TYPE,EVAL_TYPE&gt;* population) 
     for (int i = 0; i &lt; functors.size(); i++) {
         ret += functors[i]->Evaluate(&population);
     }
