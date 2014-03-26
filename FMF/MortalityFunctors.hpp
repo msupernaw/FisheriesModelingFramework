@@ -1,19 +1,18 @@
 /* 
- * File:   SelectivityFunctors.hpp
+ * File:   MortalityFunctors.hpp
  * Author: matthewsupernaw
  *
- * Created on March 26, 2014, 10:57 AM
+ * Created on March 26, 2014, 3:54 PM
  */
 
-#ifndef SELECTIVITYFUNCTORS_HPP
-#define	SELECTIVITYFUNCTORS_HPP
+#ifndef MORTALITYFUNCTORS_HPP
+#define	MORTALITYFUNCTORS_HPP
 
-#include "atl/Distributions.hpp"
 
 namespace noaa {
     namespace nmfs {
 
-        namespace selectivity {
+        namespace mortality {
 
             namespace lengthbased {
 
@@ -23,7 +22,7 @@ namespace noaa {
 
                 
                 template<class BASE_TYPE, class EVAL_TYPE = BASE_TYPE>
-                class Logistic : public noaa::nmfs::PopulationFunctor< BASE_TYPE,EVAL_TYPE> {
+                class ConstantRateMortality : public noaa::nmfs::PopulationFunctor< BASE_TYPE,EVAL_TYPE> {
                 public:
 
                     virtual void Initialize(PopulationDM<BASE_TYPE>* population_m) {
@@ -39,5 +38,7 @@ namespace noaa {
 
     }
 }
-#endif	/* SELECTIVITYFUNCTORS_HPP */
+
+
+#endif	/* MORTALITYFUNCTORS_HPP */
 

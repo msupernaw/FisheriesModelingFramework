@@ -7,6 +7,8 @@
 
 #ifndef OBJECT_HPP
 #define	OBJECT_HPP
+#include <string>
+#include <sstream>
 
 namespace noaa {
     namespace nmfs {

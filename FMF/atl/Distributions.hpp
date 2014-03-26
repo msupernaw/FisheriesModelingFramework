@@ -203,10 +203,7 @@ namespace atl {
         return sizeof (T);
     }
 
-    template<class T>
-    const size_t Size(const atl::Variable<T> &x) {
-        return x.expression_m->Size();
-    }
+  
 
     /**
      * \ingroup NormalDistribution
@@ -3789,33 +3786,7 @@ namespace atl {
     //    T rsignrank(const T &x, const T &y, const T &z) {
     //    }
 
-    /**
-     * @ingroup Distributions
-     * 
-     * @brief Fills an array with random values from the specified distribution.
-     * 
-     * @param x
-     * @param distribution
-     */
-    template<class T>
-    void RandomFill(atl::Array<T> &x, const atl::Distribution<T> &distribution) {
-        for (size_t i = 0; i < x.Length(0); i++) {
-            for (size_t j = 0; j < x.Length(1); j++) {
-                for (size_t k = 0; k < x.Length(2); k++) {
-                    for (size_t l = 0; l < x.Length(3); l++) {
-                        for (size_t m = 0; m < x.Length(4); m++) {
-                            for (size_t n = 0; n < x.Length(5); n++) {
-                                for (size_t o = 0; o < x.Length(6); o++) {
-                                    x(i, j, k, l, m, n, o) = distribution.Random();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
+   
 
 }//atl
 

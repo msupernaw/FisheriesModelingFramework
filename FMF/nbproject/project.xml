@@ -6,9 +6,13 @@
             <name>FMF</name>
             <c-extensions/>
             <cpp-extensions>cpp</cpp-extensions>
-            <header-extensions/>
+            <header-extensions>hpp</header-extensions>
+            <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList/>
+            <sourceRootList>
+                <sourceRootElem>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/util</sourceRootElem>
+                <sourceRootElem>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/atl</sourceRootElem>
+            </sourceRootList>
             <confList>
                 <confElem>
                     <name>Debug</name>
@@ -19,7 +23,6 @@
                     <type>1</type>
                 </confElem>
             </confList>
-            <sourceEncoding>UTF-8</sourceEncoding>
         </data>
     </configuration>
 </project>

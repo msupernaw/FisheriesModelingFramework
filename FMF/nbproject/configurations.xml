@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="80">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="atl" displayName="atl" projectFiles="true">
+      <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/atl/Distributions.hpp</itemPath>
+      <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/atl/Functions.hpp</itemPath>
+    </logicalFolder>
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
@@ -14,6 +18,15 @@
                    projectFiles="true">
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
+    <logicalFolder name="util" displayName="util" projectFiles="true">
+      <logicalFolder name="geometry" displayName="geometry" projectFiles="true">
+        <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/util/geometry/Point.hpp</itemPath>
+        <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/util/geometry/Polygon.hpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="io" displayName="io" projectFiles="true">
+      </logicalFolder>
+      <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/util/RTree.hpp</itemPath>
+    </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
                    projectFiles="false"
@@ -25,7 +38,19 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/Config.hpp</itemPath>
+    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/License.md</itemPath>
+    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/MortalityFunctors.hpp</itemPath>
+    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/Object.hpp</itemPath>
+    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/Population.hpp</itemPath>
+    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/README.md</itemPath>
+    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/RecruitmentFunctors.hpp</itemPath>
+    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/SelectivityFunctors.hpp</itemPath>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/util</Elem>
+    <Elem>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/atl</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
