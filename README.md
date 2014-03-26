@@ -34,7 +34,8 @@ selectivity, etc. This design provides flexibilty to accomidate many types of mo
 For example:
 
 <code>
-  //create a population data module
+
+    //create a population data module
     noaa::nmfs::AgeBasedPopulation<double> population;
 
     //create a functor list
