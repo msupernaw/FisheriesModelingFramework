@@ -1,5 +1,7 @@
 Generic Template library for NOAA NMFS fisheries stock assessment modeling.
 
+Status: incomplete
+
 Description:
 
 Template based classes and routines provide reusable code. Template classes 
