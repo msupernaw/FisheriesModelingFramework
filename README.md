@@ -27,9 +27,9 @@ AgeBasedPopulation&lt;double, ad::BigFloat&lt;double&gt; &gt; population;
 This code makes heavy use of polymorphism/inheritance to provide flexibility. 
 
 Fish populations are represented in the code by data modules derived from the base class PopulationDM,
-which hold relevant information about the fish popolation. Special functors are developed that make evaluations
+which hold relevant information about the fish population. Special functors are developed that make evaluations
 based on input in the form of a PopulationDM. Functors can be operations that evaluate mortality, recruitment,
-selectivity, etc. This design provides flexibilty to accomidate many types of modeling efforts within NMFS.
+selectivity, etc. This design provides flexibility to accommodate many types of modeling efforts within NMFS.
 
 For example:
 
