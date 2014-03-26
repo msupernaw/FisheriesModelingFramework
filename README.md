@@ -30,3 +30,30 @@ Fish populations are represented in the code by data modules derived from the ba
 which hold relevant information about the fish popolation. Special functors are developed that make evaluations
 based on input in the form of a PopulationDM. Functors can be operations that evaluate mortality, recruitment,
 selectivity, etc. This design provides flexibilty to accomidate many types of modeling efforts within NMFS.
+
+<code>
+
+//create a population data module
+    noaa::nmfs::AgeBasedPopulation<double> population;
+
+    //create a functor list
+    std::vector<noaa::nmfs::PopulationFunctor<double>* > functors;
+
+    //make a recruitment functor and add it to the list
+    noaa::nmfs::recruitment::agebased::BevertonHolt<double> beverton_holt;
+    functors.push_back(&beverton_holt);
+
+    //make a selectivity functor and add it to the list
+    noaa::nmfs::selectivity::agebased::Logistic<double> logistic_selectivity;
+    functors.push_back(&logistic_selectivity);
+
+    //make a mortality functor and add it to the list
+    noaa::nmfs::mortality::agebased::ConstantRateMortality<double> constant_rate_mortality;
+    functors.push_back(&constant_rate_mortality);
+
+    double ret = 0;
+    for (int i = 0; i < functors.size(); i++) {
+        ret += functors[i]->Evaluate(&population);
+    }
+
+</code>
