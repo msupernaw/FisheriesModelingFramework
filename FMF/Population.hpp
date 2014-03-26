@@ -153,7 +153,7 @@ namespace noaa {
          */
         template< class T, class EVAL_TYPE = T>
         class AgeBasedPopulation : public PopulationDM<T, EVAL_TYPE> {
-            uint32_t numbers_at_age;
+            uint32_t size;
 
             /***************************************************************
              *              Age based modeling data.                       *
