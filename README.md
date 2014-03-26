@@ -31,9 +31,10 @@ which hold relevant information about the fish popolation. Special functors are 
 based on input in the form of a PopulationDM. Functors can be operations that evaluate mortality, recruitment,
 selectivity, etc. This design provides flexibilty to accomidate many types of modeling efforts within NMFS.
 
-<code>
+For example:
 
-//create a population data module
+<code>
+  //create a population data module
     noaa::nmfs::AgeBasedPopulation<double> population;
 
     //create a functor list
@@ -55,5 +56,17 @@ selectivity, etc. This design provides flexibilty to accomidate many types of mo
     for (int i = 0; i < functors.size(); i++) {
         ret += functors[i]->Evaluate(&population);
     }
-
 </code>
+
+To-do:
+
+1) Make dvariable wrapper classe(or just define cmath functions in namespace std).
+2) Define functors already present in stock synthesis
+3) Finish polygon/geo area class
+4) Write routine for nearest neighbor list building for populations
+5) Write SizeBasedPopulation class 
+6) Define size based functors.
+
+
+
+
