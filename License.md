@@ -24,7 +24,7 @@ particular purpose.
 
 Please cite the author in any work or product based on this material.
  
-Author: Matthew Supernaw
-        National Oceanic and Atmospheric Administration
-        National Marine Fisheries Service
-        Sustainable Fisheries Division
+Author: Matthew Supernaw <br/>
+        National Oceanic and Atmospheric Administration <br/>
+        National Marine Fisheries Service <br/>
+        Sustainable Fisheries Division <br/>
