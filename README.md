@@ -36,21 +36,21 @@ For example:
 
 <pre><code>
   //create a population data module
-    noaa::nmfs::AgeBasedPopulation<double> population;
+    noaa::nmfs::AgeBasedPopulation&lt;double&gt; population;
 
     //create a functor list
-    std::vector<noaa::nmfs::PopulationFunctor<double>* > functors;
+    std::vector&lt;noaa::nmfs::PopulationFunctor&lt;double&gt;* &gt;functors;
 
     //make a recruitment functor and add it to the list
-    noaa::nmfs::recruitment::agebased::BevertonHolt<double> beverton_holt;
+    noaa::nmfs::recruitment::agebased::BevertonHolt&lt;double&gt; beverton_holt;
     functors.push_back(&beverton_holt);
 
     //make a selectivity functor and add it to the list
-    noaa::nmfs::selectivity::agebased::Logistic<double> logistic_selectivity;
+    noaa::nmfs::selectivity::agebased::Logistic&lt;double&gt; logistic_selectivity;
     functors.push_back(&logistic_selectivity);
 
     //make a mortality functor and add it to the list
-    noaa::nmfs::mortality::agebased::ConstantRateMortality<double> constant_rate_mortality;
+    noaa::nmfs::mortality::agebased::ConstantRateMortality&lt;double&gt; constant_rate_mortality;
     functors.push_back(&constant_rate_mortality);
 
     double ret = 0;
