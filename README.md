@@ -74,6 +74,7 @@ To-do:<br/>
 4) Write routine for nearest neighbor list building for populations<br/>
 5) Write SizeBasedPopulation class <br/>
 6) Define size based functors.<br/>
+7) Come up with a catchier name!<br/>
 
 
 
