@@ -68,7 +68,7 @@ For example:
 
 To-do:<br/>
 <br/>
-1) Make dvariable wrapper classe(or just define cmath functions in namespace std).<br/>
+1) Make dvariable wrapper class(or just define cmath functions in namespace std).<br/>
 2) Define functors already present in stock synthesis<br/>
 3) Finish polygon/geo area class<br/>
 4) Write routine for nearest neighbor list building for populations<br/>
