@@ -38,10 +38,14 @@ int main(int argc, char** argv) {
     functors.push_back(&constant_rate_mortality);
 
     double ret = 0;
-    for (int i = 0; i < functors.size(); i++) {
-        ret += functors[i]->Evaluate(&population);
+    for (int t = 0; t < 40; t++) {
+        population.SetCurrentYear(t);
+        for (int i = 0; i < functors.size(); i++) {
+            ret += functors[i]->Evaluate(&population);
+        }
     }
-
+    
+    std::cout<<ret<<"\n";
 
     return 0;
 }

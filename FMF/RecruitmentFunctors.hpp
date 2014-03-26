@@ -14,57 +14,64 @@
 namespace noaa {
     namespace nmfs {
         namespace recruitment {
-            
+
             namespace lengthbased {
-                
+
             }
-            
+
             namespace agebased {
 
                 template<class BASE_TYPE, class EVAL_TYPE = BASE_TYPE>
-                class BevertonHolt : public noaa::nmfs::PopulationFunctor< BASE_TYPE,EVAL_TYPE> {
+                class BevertonHolt : public noaa::nmfs::PopulationFunctor< BASE_TYPE, EVAL_TYPE> {
                 public:
 
                     virtual void Initialize(PopulationDM<BASE_TYPE>* population_m) {
                     }
 
                     virtual const EVAL_TYPE Evaluate(PopulationDM<BASE_TYPE>* population_m) {
+
+
+                        return EVAL_TYPE(1.0);
                     }
 
                 };
 
                 template<class BASE_TYPE, class EVAL_TYPE = BASE_TYPE>
-                class Ricker : public noaa::nmfs::PopulationFunctor< BASE_TYPE,EVAL_TYPE> {
+                class Ricker : public noaa::nmfs::PopulationFunctor< BASE_TYPE, EVAL_TYPE> {
                 public:
 
                     virtual void Initialize(PopulationDM<BASE_TYPE>* population_m) {
                     }
 
                     virtual const EVAL_TYPE Evaluate(PopulationDM<BASE_TYPE>* population_m) {
+                        return EVAL_TYPE(1.0);
                     }
 
                 };
 
                 template<class BASE_TYPE, class EVAL_TYPE = BASE_TYPE>
-                class HockeyStick : public noaa::nmfs::PopulationFunctor< BASE_TYPE,EVAL_TYPE> {
+                class HockeyStick : public noaa::nmfs::PopulationFunctor< BASE_TYPE, EVAL_TYPE> {
                 public:
 
                     virtual void Initialize(PopulationDM<BASE_TYPE>* population_m) {
                     }
 
                     virtual const EVAL_TYPE Evaluate(PopulationDM<BASE_TYPE>* population_m) {
+                        return EVAL_TYPE(1.0);
                     }
 
                 };
 
                 template<class BASE_TYPE, class EVAL_TYPE = BASE_TYPE>
-                class SurvivalBased : public noaa::nmfs::PopulationFunctor< BASE_TYPE,EVAL_TYPE> {
+                class SurvivalBased : public noaa::nmfs::PopulationFunctor< BASE_TYPE, EVAL_TYPE> {
                 public:
 
                     virtual void Initialize(PopulationDM<BASE_TYPE>* population_m) {
                     }
 
                     virtual const EVAL_TYPE Evaluate(PopulationDM<BASE_TYPE>* population_m) {
+
+                        return EVAL_TYPE(1.0);
                     }
 
                 };
@@ -74,8 +81,8 @@ namespace noaa {
 
 
         }
-        
-        
+
+
     }
 }
 

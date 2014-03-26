@@ -30,6 +30,7 @@ namespace noaa {
                     }
 
                     virtual const EVAL_TYPE Evaluate(PopulationDM<BASE_TYPE>* population_m) {
+                     return EVAL_TYPE(1.0);
                     }
 
                 };
