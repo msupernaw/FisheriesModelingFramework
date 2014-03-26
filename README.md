@@ -58,6 +58,8 @@ For example:
     functors.push_back(&constant_rate_mortality);
 
     double ret = 0;
+
+    //all functors provide the routine Evaluate(noaa::nmfs::Population&ltBASE_TYPE,EVAL_TYPE&gt;* population) 
     for (int i = 0; i &lt; functors.size(); i++) {
         ret += functors[i]->Evaluate(&population);
     }
