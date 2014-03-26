@@ -54,7 +54,7 @@ For example:
     functors.push_back(&constant_rate_mortality);
 
     double ret = 0;
-    for (int i = 0; i < functors.size(); i++) {
+    for (int i = 0; i &lt; functors.size(); i++) {
         ret += functors[i]->Evaluate(&population);
     }
 </code></pre>
