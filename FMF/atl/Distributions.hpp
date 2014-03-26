@@ -11,7 +11,6 @@
 #include <cmath>
 
 #define T_NAN (T(0)/T(0))
-//#include "Variable.hpp"
 
 #include "Functions.hpp"
 
