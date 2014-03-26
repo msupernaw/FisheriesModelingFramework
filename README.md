@@ -12,6 +12,10 @@ types, such as ADNumbers or dvariables.
 For instance:
 <pre><code>
 
+
+//evaluation types will be double
+AgeBasedPopulation&lt;double&gt; population;
+
 //evaluation types will be dvariables
 AgeBasedPopulation&lt;double, dvariable&gt; population; 
 
