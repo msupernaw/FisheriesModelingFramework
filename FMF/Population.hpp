@@ -1,12 +1,12 @@
 /* 
- * File:   SSPopulation.hpp
+ * File:   Population.hpp
  * Author: matthewsupernaw
  *
  * Created on March 26, 2014, 7:24 AM
  */
 
-#ifndef SSPOPULATION_HPP
-#define	SSPOPULATION_HPP
+#ifndef NOAA_NMFS_POPULATION_HPP
+#define	NOAA_NMFS_POPULATION_HPP
 
 #include "Config.hpp"
 #include "util/geometry/Polygon.hpp"

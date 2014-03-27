@@ -1,11 +1,11 @@
-/* RecruitmentFunctors.hpp
+/* Recruitment.hpp
  * Author: matthewsupernaw
  *
  * Created on March 26, 2014, 10:49 AM
  */
 
-#ifndef POPULATIONFUNCTORS_HPP
-#define	POPULATIONFUNCTORS_HPP
+#ifndef NOAA_NMFS_RECRUITMENT_HPP
+#define	NOAA_NMFS_RECRUITMENT_HPP
 
 #include "Common.hpp"
 #include "Population.hpp"

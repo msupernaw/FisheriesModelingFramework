@@ -1,12 +1,12 @@
 /* 
- * File:   SelectivityFunctors.hpp
+ * File:   Selectivity.hpp
  * Author: matthewsupernaw
  *
  * Created on March 26, 2014, 10:57 AM
  */
 
-#ifndef SELECTIVITYFUNCTORS_HPP
-#define	SELECTIVITYFUNCTORS_HPP
+#ifndef NOAA_NMFS_SELECTIVITY_HPP
+#define	NOAA_NMFS_SELECTIVITY_HPP
 
 #include "atl/Distributions.hpp"
 

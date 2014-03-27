@@ -1,12 +1,12 @@
 /* 
- * File:   MortalityFunctors.hpp
+ * File:   Mortality.hpp
  * Author: matthewsupernaw
  *
  * Created on March 26, 2014, 3:54 PM
  */
 
-#ifndef MORTALITYFUNCTORS_HPP
-#define	MORTALITYFUNCTORS_HPP
+#ifndef NOAA_NMFS_MORTALITY_HPP
+#define	NOAA_NMFS_MORTALITY_HPP
 
 
 namespace noaa {
