@@ -18,8 +18,10 @@ noaa::nmfs::PopulationDM<double, double>* BuildPopulationModel(const std::string
     noaa::nmfs::PopulationDM<double, double>* pop =
     new noaa::nmfs::PopulationDM<double, double>();
     pop->SetName(name);
+    
+    pop->AddAttribute<std::string>("model_type", "age_based");
     pop->AddAttribute<int>("number_of_age_groups", 20);
-    pop->AddAttribute<std::vector<uint32_t> >("intial_number_at_age", std::vector<uint32_t>(20));
+    pop->AddAttribute<std::vector<uint32_t> >("initial_number_at_age", std::vector<uint32_t>(20));
     pop->AddAttribute<double>("R_0", 100000.000);
     pop->CreateFunctor<noaa::nmfs::recruitment::agebased::BevertonHoltFunctor<double> >("beverton_holt");
     pop->CreateFunctor<noaa::nmfs::mortality::agebased::ConstantRateMortality<double> >("mortality");
