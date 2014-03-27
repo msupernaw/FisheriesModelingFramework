@@ -7,9 +7,9 @@
 
 #include <cstdlib>
 #include "Population.hpp"
-#include "RecruitmentFunctors.hpp"
-#include "SelectivityFunctors.hpp"
-#include "MortalityFunctors.hpp"
+#include "Recruitment.hpp"
+#include "Selectivity.hpp"
+#include "Mortality.hpp"
 
 using namespace std;
 
