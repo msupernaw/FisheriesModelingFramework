@@ -101,6 +101,12 @@ std::ostream& operator <<(std::ostream &out, noaa::nmfs::Object &obj) {
     return out;
 }
 
+std::stringstream& operator <<(std::stringstream &out, noaa::nmfs::Object &obj) {
+    out << obj.ToString();
+    return out;
+}
+
+
 
 #endif	/* OBJECT_HPP */
 

@@ -13,24 +13,67 @@
 #include "Common.hpp"
 using namespace std;
 
-noaa::nmfs::PopulationDM<double, double>* BuildPopulationModel(const std::string &name) {
+#define dvariable double
 
-    noaa::nmfs::PopulationDM<double, double>* pop =
-    new noaa::nmfs::PopulationDM<double, double>();
-    pop->SetName(name);
+void BuildPopulationModel2() {
+
+
+
+    //1. define  a population with base double and evaluation type dvariable
+    noaa::nmfs::PopulationDM<double, dvariable> pop;
+
+    /**
+     * Data Section
+     */
+
+    //2. add an attribute telling functors that this is age based
+    pop.AddAttribute<std::string > ("model_type", "age_based");
+
+    //3. add an attribute for the number of age groups
+    pop.AddAttribute<int>("number_of_age_groups", 20);
+
+    //4. add an attribte for the initial numbers a age
+    pop.AddAttribute<std::vector<uint32_t> >("initial_number_at_age", std::vector<uint32_t > (20));
+
+    //5. add an attribute telling us how many years to simulate
+    pop.AddAttribute<int>("years", 200);
+
+    //5. add an attribute telling us how many seasons to simulate
+    pop.AddAttribute<int>("seasons", 4);
+
+    /**
+     * Evaluation 
+     */
+    //add a beverton-hold functor
+    pop.CreateFunctor<noaa::nmfs::recruitment::agebased::BevertonHoltFunctor<double,dvariable> >("beverton_holt");
+
+    //add a mortality functor
+    pop.CreateFunctor<noaa::nmfs::mortality::agebased::ConstantRateMortality<double,dvariable> >("mortality");
+
+    //add a selectivity functor
+    pop.CreateFunctor< noaa::nmfs::selectivity::agebased::Logistic<double,dvariable> >("logistic_selectivity");
+
+    /**
+     * Initialize 
+     */
+    //initialize registered functors
+    pop.InitializeFunctors();
+
+    int years = pop.GetAttributeValue<int>("years");
+    int seasons = pop.GetAttributeValue<int>("seasons");
     
-    pop->AddAttribute<std::string>("model_type", "age_based");
-    pop->AddAttribute<int>("number_of_age_groups", 20);
-    pop->AddAttribute<std::vector<uint32_t> >("initial_number_at_age", std::vector<uint32_t>(20));
-    pop->AddAttribute<double>("R_0", 100000.000);
-    pop->CreateFunctor<noaa::nmfs::recruitment::agebased::BevertonHoltFunctor<double> >("beverton_holt");
-    pop->CreateFunctor<noaa::nmfs::mortality::agebased::ConstantRateMortality<double> >("mortality");
-    pop->CreateFunctor< noaa::nmfs::selectivity::agebased::Logistic<double> >("logistic_selectivity");
-    pop->InitializeFunctors();
-    std::cout<<pop->ToString()<<"\n";
-    
-    
-    return pop;
+    dvariable ret = 0.0;
+    for (int y = 0; y < years; y++) {
+//        std::cout<<"year "<<y<<"\n";
+        pop.SetCurrentYear(y);
+        for (int s = 0; s < seasons; s++) {
+//               std::cout<<" season "<<s<<"\n";
+            pop.SetCurrentSeason(s);
+            ret+=pop.SumFunctors();
+        }
+    }
+
+    std::cout<<ret<<"\n";
 }
 
 using namespace noaa::nmfs;
@@ -39,66 +82,9 @@ using namespace noaa::nmfs;
  * 
  */
 int main(int argc, char** argv) {
-
-    noaa::nmfs::PopulationDM<double, double>* pop = BuildPopulationModel("test population"); 
+BuildPopulationModel2();
+exit(0);
     
-    noaa::nmfs::PopulationAttribute<std::vector<uint32_t> >* naa = 
-            (noaa::nmfs::PopulationAttribute<std::vector<uint32_t> >*)pop->GetAttribute("intial_number_at_age");
-    std::cout<<naa->GetAttributeValue()<<"\n";
-    delete pop;
-    std::vector<int> iv(10, 1);
-    
-    std::cout<<iv<<"\n";
-    
-    exit(0);
-    
-    //create a population data module
-    noaa::nmfs::PopulationDM<double> population;
-
-    population.AddAttribute<std::string > ("type", "age_based");
-
-    population.AddAttribute<std::vector<double> >("yield", std::vector<double>(1000));
-
-    noaa::nmfs::PopulationAttribute<std::vector<double> >* attr =
-            (noaa::nmfs::PopulationAttribute<std::vector<double> >*) population.GetAttribute("type");
-
-    std::cout << attr->GetName() << "\n";
-
-
-
-    //create a functor list
-    std::vector<noaa::nmfs::PopulationFunctor<double>* > functors;
-
-    population.CreateFunctor<noaa::nmfs::recruitment::agebased::BevertonHoltFunctor<double> >("beverton_holt");
-    population.CreateFunctor<noaa::nmfs::mortality::agebased::ConstantRateMortality<double> >("mortality");
-    population.CreateFunctor< noaa::nmfs::selectivity::agebased::Logistic<double> >("logistic_selectivity");
-    population.InitializeFunctors();
-
-    ////    //make a recruitment functor and add it to the list
-    //    noaa::nmfs::recruitment::agebased::BevertonHoltFunctor<double> beverton_holt;
-    //    functors.push_back(&beverton_holt);
-
-    //make a selectivity functor and add it to the list
-    //    noaa::nmfs::selectivity::agebased::Logistic<double> logistic_selectivity;
-    //    functors.push_back(&logistic_selectivity);
-    //
-    //    //make a mortality functor and add it to the list
-    //    noaa::nmfs::mortality::agebased::ConstantRateMortality<double> constant_rate_mortality;
-    //    functors.push_back(&constant_rate_mortality);
-
-    double ret = 0;
-    for (int t = 0; t < 400; t++) {
-        population.SetCurrentYear(t);
-        std::cout << population.GetCurrentYear() << "\n";
-        ret += population.SumFunctors();
-        //        for (int i = 0; i < functors.size(); i++) {
-        //            ret += functors[i]->Evaluate(&population);
-        //        }
-        //        ret+=population.EvaluateFunctor("beverton_holt");
-    }
-
-    std::cout << ret << "\n";
-
     return 0;
 }
 

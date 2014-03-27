@@ -9,7 +9,7 @@
 #define	NOAA_NMFS_POPULATION_HPP
 
 #include <map>
-
+#include "Common.hpp"
 #include "Config.hpp"
 #include "util/geometry/Polygon.hpp"
 #include "Object.hpp"
@@ -54,7 +54,7 @@ namespace noaa {
             virtual const EVAL_TYPE Evaluate(PopulationDM<T, EVAL_TYPE>* population_m) = 0;
         };
 
-        class PopulationAttributeBase {
+        class PopulationAttributeBase :public noaa::nmfs::Object {
             std::string attribute_name;
         public:
 
@@ -80,6 +80,10 @@ namespace noaa {
 
         public:
 
+            operator ATTRIBUTE_TYPE() const{
+                return this->attribute_value;
+            }
+            
             PopulationAttribute(const std::string &name,
                     const ATTRIBUTE_TYPE &value) : PopulationAttributeBase(name),
             attribute_value(value) {
@@ -90,7 +94,7 @@ namespace noaa {
 
             }
 
-            ATTRIBUTE_TYPE GetAttributeValue() const {
+            ATTRIBUTE_TYPE& GetAttributeValue()  {
                 return attribute_value;
             }
 
@@ -99,7 +103,11 @@ namespace noaa {
             }
 
 
-
+            virtual std::string ToString(){
+                std::stringstream ss;
+                ss<<this->GetName()<<":"<<this->GetAttributeValue();
+                return ss.str();
+            }
 
 
 
@@ -141,6 +149,19 @@ namespace noaa {
 
             PopulationAttributeBase* GetAttribute(const std::string &name) {
                 return this->attributes[name];
+            }
+            
+            template<class ATTRIBUTE_TYPE>
+            ATTRIBUTE_TYPE& GetAttributeValue(std::string name){
+                PopulationAttribute<ATTRIBUTE_TYPE> * attr
+                        = (PopulationAttribute<ATTRIBUTE_TYPE> *)this->attributes[name];
+                
+                if(attr){
+                    return attr->GetAttributeValue();
+                }else{
+                    std::cout<<"attribute \""<<name<<"\" not found in population name \""<<this->GetName()<<"\"";
+                    exit(0);
+                }
             }
 
             template<class FUNCTOR_TYPE>
@@ -227,18 +248,18 @@ namespace noaa {
             virtual std::string ToString() {
                 std::stringstream ss;
 
-                ss << "Population Name: " << this->GetName() << "\n";
+                ss << "\nPopulation Name: " << this->GetName() << "\n";
                 ss << "Population Attributes: \n";
                 AttributeIterator ait;
 
                 for (ait = this->attributes.begin(); ait != this->attributes.end(); ait++) {
-                    ss << " " << ait->first <<": "<< "\n";
+                    ss << " " << *ait->second<<"\n";
                 }
 
                 FunctorIterator it;
                 ss << "Population Functors: \n";
                 for (it = this->functors.begin(); it != this->functors.end(); it++) {
-                    ss << " " << it->first<<"\n";
+                    ss << " " << *it->second<<"\n";
                 }
 
 
@@ -254,6 +275,14 @@ namespace noaa {
 
 
 }
+
+template<class T,class T2, class charT, class traits>
+std::basic_ostream<charT, traits>&
+operator <<(std::basic_ostream<charT, traits>& out, const noaa::nmfs::PopulationDM<T,T2> &pop) {
+    out<<pop.ToString();
+    return out;
+}
+
 
 #endif	/* SSPOPULATION_HPP */
 
