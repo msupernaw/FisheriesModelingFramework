@@ -8,6 +8,8 @@
 #ifndef NOAA_NMFS_POPULATION_HPP
 #define	NOAA_NMFS_POPULATION_HPP
 
+#include <map>
+
 #include "Config.hpp"
 #include "util/geometry/Polygon.hpp"
 #include "Object.hpp"
@@ -28,7 +30,6 @@ namespace noaa {
         template< class T, class EVAL_TYPE>
         class AgeBasedPopulation;
 
-        
         /**
          * Population Functors take a PopulationDM as input and 
          * make evaluations based on the data stored in the 
@@ -53,6 +54,58 @@ namespace noaa {
             virtual const EVAL_TYPE Evaluate(PopulationDM<T, EVAL_TYPE>* population_m) = 0;
         };
 
+        class PopulationAttributeBase {
+            std::string attribute_name;
+        public:
+
+            std::string GetName() const {
+                return attribute_name;
+            }
+
+            void SetName(std::string name) {
+                this->attribute_name = name;
+            }
+
+        public:
+
+            PopulationAttributeBase(const std::string &name) : attribute_name(name) {
+            }
+        };
+
+        template< class ATTRIBUTE_TYPE>
+        class PopulationAttribute : public PopulationAttributeBase {
+            ATTRIBUTE_TYPE attribute_value;
+
+
+
+        public:
+
+            PopulationAttribute(const std::string &name,
+                    const ATTRIBUTE_TYPE &value) : PopulationAttributeBase(name),
+            attribute_value(value) {
+
+            }
+
+            PopulationAttribute(const PopulationAttribute& other) {
+
+            }
+
+            ATTRIBUTE_TYPE GetAttributeValue() const {
+                return attribute_value;
+            }
+
+            void SetAttributeValue(ATTRIBUTE_TYPE attribute_value) {
+                this->attribute_value = attribute_value;
+            }
+
+
+
+
+
+
+
+        };
+
         /**
          * PopulationDM is a simulation data module object and serves as a
          * base class for other population types, such as AgeBasedPopulation,
@@ -60,21 +113,72 @@ namespace noaa {
          * 
          */
         template< class T, class EVAL_TYPE = T>
-        class PopulationDM : noaa::nmfs::Object{
+        class PopulationDM : noaa::nmfs::Object {
         protected:
             Configuration<T, EVAL_TYPE>* config; //general runtime configuration
             PopulationArea<T> area; //populations geographic area
-            std::vector<PopulationDM<T, EVAL_TYPE>* > nearest_niegbors; //nearest populations of the same species
+            std::vector<PopulationDM<T, EVAL_TYPE>* > nearest_neighbors; //nearest populations of the same species
+            std::map<std::string, PopulationAttributeBase*> attributes;
+            std::map<std::string, PopulationFunctor<T, EVAL_TYPE>* > functors;
 
-            //varying time step info
-            uint32_t start_year;
-            uint32_t end_year;
-            uint32_t seasons;
+            typedef typename std::map<std::string, PopulationFunctor<T, EVAL_TYPE>* >::iterator FunctorIterator;
+
+
+
             uint32_t current_year;
             uint32_t current_season;
 
 
         public:
+
+            template<class ATTRIBUTE_TYPE>
+            void AddAttribute(const std::string &name, const ATTRIBUTE_TYPE &attribute) {
+
+                PopulationAttribute<ATTRIBUTE_TYPE> * attr
+                        = new PopulationAttribute<ATTRIBUTE_TYPE > (name, attribute);
+                this->attributes[name] = (PopulationAttributeBase*) attr;
+            }
+
+            PopulationAttributeBase* GetAttribute(const std::string &name) {
+                return this->attributes[name];
+            }
+
+            template<class FUNCTOR_TYPE>
+            void CreateFunctor(const std::string &name, bool initialize = false) {
+                this->functors[name] = new FUNCTOR_TYPE();
+                if (initialize) {
+                    this->functors[name]->Initialize(this);
+                }
+            }
+
+            void InitializeFunctors() {
+                FunctorIterator it;
+
+                for (it = this->functors.begin(); it != this->functors.end(); it++) {
+                    PopulationFunctor<T, EVAL_TYPE>* func = it->second;
+                    func->Initialize(this);
+                }
+
+            }
+
+            const EVAL_TYPE EvaluateFunctor(const std::string &name) {
+                PopulationFunctor<T, EVAL_TYPE>* func = this->functors[name];
+                if (func != NULL) {
+                    return func->Evaluate(this);
+                }
+
+                return (EVAL_TYPE) 0.0;
+            }
+
+            const EVAL_TYPE SumFunctors() {
+                FunctorIterator it;
+                EVAL_TYPE ret = 0.0;
+                for (it = this->functors.begin(); it != this->functors.end(); it++) {
+                    PopulationFunctor<T, EVAL_TYPE>* func = it->second;
+                    ret += func->Evaluate(this);
+                }
+                return ret;
+            }
 
             PopulationArea<T> GetArea() const {
                 return area;
@@ -84,12 +188,20 @@ namespace noaa {
                 this->area = area;
             }
 
-            Configuration<T,EVAL_TYPE>* GetConfiguration() const {
+            Configuration<T, EVAL_TYPE>* GetConfiguration() const {
                 return config;
             }
 
             void SetConfiguration(Configuration<T, EVAL_TYPE>* config) {
                 this->config = config;
+            }
+
+            std::vector<PopulationDM<T, EVAL_TYPE>*> GetNearestNeigbors() const {
+                return nearest_neighbors;
+            }
+
+            void SetNearestNeigbors(std::vector<PopulationDM<T, EVAL_TYPE>*> nearestneighbors) {
+                this->nearest_neighbors = nearestneighbors;
             }
 
             uint32_t GetCurrentSeason() const {
@@ -108,76 +220,16 @@ namespace noaa {
                 this->current_year = current_year;
             }
 
-            uint32_t GetEndYear() const {
-                return end_year;
+            void AddNeighbor(PopulationDM<T, EVAL_TYPE>* neighbor, T range = std::numeric_limits<T>::max()) {
+
             }
-
-            void SetEndYear(uint32_t end_year) {
-                this->end_year = end_year;
-            }
-
-            std::vector<PopulationDM<T, EVAL_TYPE>*> GetNearestNiegbors() const {
-                return nearest_niegbors;
-            }
-
-            void SetNearestNiegbors(std::vector<PopulationDM<T, EVAL_TYPE>*> nearest_niegbors) {
-                this->nearest_niegbors = nearest_niegbors;
-            }
-
-            uint32_t GetNumberOfSeasons() const {
-                return seasons;
-            }
-
-            void SetNumberOfSeasons(uint32_t seasons) {
-                this->seasons = seasons;
-            }
-
-            uint32_t GetStartYear() const {
-                return start_year;
-            }
-
-            void SetStartYear(uint32_t start_year) {
-                this->start_year = start_year;
-            }
-
-
 
         };
 
-        /**
-         * AgeBasedPopulation class.
-         * 
-         * A Fishery modeling data module object that holds age relevant 
-         * information about a population of fish.
-         * 
-         */
-        template< class T, class EVAL_TYPE = T>
-        class AgeBasedPopulation : public PopulationDM<T, EVAL_TYPE> {
-            uint32_t size;
 
-            /***************************************************************
-             *              Age based modeling data.                       *
-             ***************************************************************/
-            std::vector<uint32_t> ages;
-            std::vector<uint32_t > numbers_at_age_males;
-            std::vector<uint32_t > numbers_at_age_females;
-            std::vector<uint32_t > biomass_at_age_males;
-            std::vector<uint32_t > biomass_at_age_females;
-            std::vector<T> length_at_age_males;
-            std::vector<T> length_at_age_females;
-            std::vector<T> fecundity_at_age_males;
-            std::vector<T> fecundity_at_age_females;
-
-        public:
-
-
-
-
-
-
-        };
 
     }
+
 
 
 }
