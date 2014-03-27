@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
     std::vector<noaa::nmfs::PopulationFunctor<double>* > functors;
 
     //make a recruitment functor and add it to the list
-    noaa::nmfs::recruitment::agebased::BevertonHolt<double> beverton_holt;
+    noaa::nmfs::recruitment::agebased::BevertonHoltFunctor<double> beverton_holt;
     functors.push_back(&beverton_holt);
 
     //make a selectivity functor and add it to the list

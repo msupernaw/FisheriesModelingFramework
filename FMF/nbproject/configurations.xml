@@ -38,14 +38,15 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/Common.hpp</itemPath>
     <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/Config.hpp</itemPath>
     <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/License.md</itemPath>
-    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/MortalityFunctors.hpp</itemPath>
+    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/Mortality.hpp</itemPath>
     <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/Object.hpp</itemPath>
     <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/Population.hpp</itemPath>
     <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/README.md</itemPath>
-    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/RecruitmentFunctors.hpp</itemPath>
-    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/SelectivityFunctors.hpp</itemPath>
+    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/Recruitment.hpp</itemPath>
+    <itemPath>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/Selectivity.hpp</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>/Users/matthewsupernaw/NetBeansProjects/FisheriesModelingFramework/FMF/util</Elem>
