@@ -113,7 +113,7 @@ namespace noaa {
          * 
          */
         template< class T, class EVAL_TYPE = T>
-        class PopulationDM : noaa::nmfs::Object {
+        class PopulationDM : public noaa::nmfs::Object {
         protected:
             Configuration<T, EVAL_TYPE>* config; //general runtime configuration
             PopulationArea<T> area; //populations geographic area
@@ -122,7 +122,7 @@ namespace noaa {
             std::map<std::string, PopulationFunctor<T, EVAL_TYPE>* > functors;
 
             typedef typename std::map<std::string, PopulationFunctor<T, EVAL_TYPE>* >::iterator FunctorIterator;
-
+            typedef typename std::map<std::string, PopulationAttributeBase* >::iterator AttributeIterator;
 
 
             uint32_t current_year;
@@ -222,6 +222,27 @@ namespace noaa {
 
             void AddNeighbor(PopulationDM<T, EVAL_TYPE>* neighbor, T range = std::numeric_limits<T>::max()) {
 
+            }
+
+            virtual std::string ToString() {
+                std::stringstream ss;
+
+                ss << "Population Name: " << this->GetName() << "\n";
+                ss << "Population Attributes: \n";
+                AttributeIterator ait;
+
+                for (ait = this->attributes.begin(); ait != this->attributes.end(); ait++) {
+                    ss << " " << ait->first <<": "<< "\n";
+                }
+
+                FunctorIterator it;
+                ss << "Population Functors: \n";
+                for (it = this->functors.begin(); it != this->functors.end(); it++) {
+                    ss << " " << it->first<<"\n";
+                }
+
+
+                return ss.str();
             }
 
         };
